@@ -187,6 +187,8 @@ module Grape
     def call!(env)
       extend helpers
 
+      @env = env
+
       env['api.endpoint'] = self
       if options[:app]
         options[:app].call(env)
@@ -214,7 +216,6 @@ module Grape
     protected
 
     def run(env)
-      @env = env
       @header = {}
 
       @request = Grape::Request.new(env)
